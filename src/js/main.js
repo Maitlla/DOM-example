@@ -1,3 +1,5 @@
+import { replaceInnetHTML } from "./lib/auxiliar.mjs"
+
 // moked data
 const tasks = [
     {
@@ -38,8 +40,7 @@ function taskListHTML () {
 }
 
 function insertTasksHTML () {
-    const ul = document.querySelector("#tasksList");
-    ul.innerHTML = taskListHTML();
+    replaceInnetHTML("#tasksList",taskListHTML())
 }
 
 window.addEventListener('load',insertTasksHTML)
