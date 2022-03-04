@@ -1,16 +1,5 @@
-import { replaceInnetHTML } from "./lib/auxiliar.mjs"
-
-// moked data
-const tasks = [
-    {
-    taskName: "Sacar al perro",
-    completed: true,
-    },
-    {
-    taskName: "Ir a clase",
-    completed: false,
-    },
-]
+import { replaceInnetHTML } from "./lib/auxiliar.mjs";
+import { tasks } from "./models/generic.mjs";
 
 /**
  * Recibe descripción y estado de la tarea
@@ -30,20 +19,29 @@ function data2HTML (taskName, completed) {
     return taskHTML
 }
 
-function taskListHTML () {
+/**
+ * Construye un los elementos de una lista HTML
+ * a partir de un array de objentos de tareas.
+ * @param {*} taskArray 
+ * @returns {string} - Sucesión de elementos <li>
+ */
+function taskListHTML (taskArray) {
     let HTMLtext = "";
-    for ( let item of tasks ) {
+    for ( let item of taskArray ) {
         const HTMLelemento = data2HTML(item.taskName, item.completed)
         HTMLtext += HTMLelemento;
     }
     return HTMLtext
 }
 
-function insertTasksHTML () {
-    replaceInnetHTML("#tasksList",taskListHTML())
-}
-
-window.addEventListener('load',insertTasksHTML)
+/**
+ * Punto de entrada al programa.
+ * Al ser importado desde index.html como módulo
+ * la ejecución se ve diferido al momento en que se
+ * termine de cargar el documento HTML.
+ */
+ const html = taskListHTML(tasks);
+ replaceInnetHTML("#tasksList",html);
 
 
 
