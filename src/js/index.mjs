@@ -1,37 +1,18 @@
-import { replaceInnetHTML } from "./lib/auxiliar.mjs";
-import { tasks } from "./models/generic.mjs";
+import { replaceTasks, getTasks, addTasks } from "./controllers/tasks.mjs";
+import { taskListHTMLSelector, addTaskButtonSelector } from "./models/defines.mjs"
 
-/**
- * Recibe descripción y estado de la tarea
- * y me entrega el HTML de UNA tarea
- * @param {string} taskName - Descripcion de la tarea
- * @param {boolean} completed - Estado de tarea
- * @returns {string} - <li> HTML resultante
- */
-function data2HTML (taskName, completed) {
-    let completedHTML = completed ? "checked" : "";
-    const taskHTML = `
-    <li>
-        <p>${taskName}</p>
-        <input type="checkbox" name="completed" id="" ${completedHTML}>
-    </li>
-    `;
-    return taskHTML
-}
+const input = document.querySelector("#taskInput");
+const button = document.querySelector("#addTasksButton");
 
-/**
- * Construye un los elementos de una lista HTML
- * a partir de un array de objentos de tareas.
- * @param {*} taskArray 
- * @returns {string} - Sucesión de elementos <li>
- */
-function taskListHTML (taskArray) {
-    let HTMLtext = "";
-    for ( let item of taskArray ) {
-        const HTMLelemento = data2HTML(item.taskName, item.completed)
-        HTMLtext += HTMLelemento;
-    }
-    return HTMLtext
+function taskAddButtonClickHandler (event) {
+    //console.log(event)
+    event.preventDefault()
+    const newTask = {
+        taskName: input.value,
+        completed: false,
+    };
+    addTasks(newTask);
+    replaceTasks(taskListHTMLSelector,getTasks());
 }
 
 /**
@@ -40,18 +21,9 @@ function taskListHTML (taskArray) {
  * la ejecución se ve diferido al momento en que se
  * termine de cargar el documento HTML.
  */
- const html = taskListHTML(tasks);
- replaceInnetHTML("#tasksList",html);
+replaceTasks(taskListHTMLSelector,getTasks());
 
-
-
-
-
-
-
-
-
-
+button.addEventListener("click", taskAddButtonClickHandler);
 
 
 
