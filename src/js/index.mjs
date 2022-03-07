@@ -1,4 +1,5 @@
-import { updateTasksHTML, getTasks, taskAddButtonClickHandler } from "./controllers/tasks.mjs";
+import { getTasks } from "./models/domainObjects.mjs";
+import { updateTasksHTML, taskAddButtonClickHandler } from "./controllers/tasks.mjs";
 import { taskListHTMLSelector, addTaskButtonSelector } from "./models/defines.mjs"
 
 
