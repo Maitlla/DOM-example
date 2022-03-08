@@ -1,3 +1,4 @@
 export const taskListHTMLSelector = "#tasksList";
 export const addTaskButtonSelector = "#addTaskButton";
-export const tasksListSelector = "#tasksList";
+export const addTaskInputSelector = "#taskInput";
+export const completedCSSClass = "completed";

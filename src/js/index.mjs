@@ -1,19 +1,7 @@
-import { replaceTasks, getTasks, addTasks } from "./controllers/tasks.mjs";
+import { getTasks } from "./models/domainObjects.mjs";
+import { updateTasksHTML, taskAddButtonClickHandler } from "./controllers/tasks.mjs";
 import { taskListHTMLSelector, addTaskButtonSelector } from "./models/defines.mjs"
 
-const input = document.querySelector("#taskInput");
-const button = document.querySelector("#addTasksButton");
-
-function taskAddButtonClickHandler (event) {
-    //console.log(event)
-    event.preventDefault()
-    const newTask = {
-        taskName: input.value,
-        completed: false,
-    };
-    addTasks(newTask);
-    replaceTasks(taskListHTMLSelector,getTasks());
-}
 
 /**
  * Punto de entrada al programa.
@@ -21,9 +9,15 @@ function taskAddButtonClickHandler (event) {
  * la ejecución se ve diferido al momento en que se
  * termine de cargar el documento HTML.
  */
-replaceTasks(taskListHTMLSelector,getTasks());
+updateTasksHTML(taskListHTMLSelector,getTasks());
 
-button.addEventListener("click", taskAddButtonClickHandler);
+document.querySelector(
+    addTaskButtonSelector
+).addEventListener(
+    "click",
+    taskAddButtonClickHandler
+);
+
 
 
 

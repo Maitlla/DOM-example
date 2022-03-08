@@ -1,58 +1,56 @@
-import { tasksStorageKey } from "../models/domainObjects.mjs";
-import { taskListHTMLSelector } from "../models/defines.mjs"
+import { addTask, saveTasks, getTasks } from "../models/domainObjects.mjs";
+import { taskListHTMLSelector, addTaskInputSelector, completedCSSClass } from "../models/defines.mjs"
 
-export function getTasks () {
-    const stringData = localStorage.getItem(tasksStorageKey) || "[]";
-    return JSON.parse(stringData);
-}
-
-export function saveTasks(tasksArray) {
-    const stringData = JSON.stringify(tasksArray)
-    return localStorage.setItem(tasksStorageKey, stringData);
-}
-
-export function addTasks(taskObject) {
-    const tasks = getTasks() || [];
-    tasks.push(taskObject);
-    saveTasks(tasks);
-}
-
-/**
- * Recibe descripción y estado de la tarea
- * y me entrega el HTML de UNA tarea
- * @param {string} taskName - Descripcion de la tarea
- * @param {boolean} completed - Estado de tarea
- * @returns {string} - <li> HTML resultante
- */
- export function task2HTMLElement (task) {
-
+export function task2HTMLElement (taskIndex, taskObject) {
     // Creo los elementos HTML
     const listHTMLItem = document.createElement("li");
     const pHTMLItem = document.createElement("p");
     const inputCheckboxHTMLItem = document.createElement("input");
-
     // Les proporciono valores 
     inputCheckboxHTMLItem.type = "checkbox";
-    inputCheckboxHTMLItem.checked = task.completed;
-    pHTMLItem.innerHTML = task.taskName
-
+    inputCheckboxHTMLItem.checked = taskObject.completed;
+    pHTMLItem.innerHTML = taskObject.taskName
     // Los anido
-    listHTMLItem.appendChild(pHTMLItem);
-    listHTMLItem.appendChild(inputCheckboxHTMLItem);
-
+    listHTMLItem.append(pHTMLItem, inputCheckboxHTMLItem);
+    // Aplico estilos si está completada
+    if (taskObject.completed) {
+        listHTMLItem.classList.add(completedCSSClass);
+    } else {
+        listHTMLItem.classList.remove(completedCSSClass);
+    }
     // Añado el manejador de eventos
     inputCheckboxHTMLItem.addEventListener(
         "click",
-        () => { console.log(listHTMLItem)}
-    )
-
+        (event) => {
+            const tasks = getTasks();
+            tasks[taskIndex].completed = event.target.checked;
+            saveTasks(tasks);
+        }
+    );
     return listHTMLItem
 }
 
-export function replaceTasks (selector, tasksArray) {
-    const listHTMLElement = document.querySelector(selector);
-    listHTMLElement.innerHTML = ""
-    for ( let item of tasksArray ) {
-        listHTMLElement.appendChild(task2HTMLElement(item))
+export function updateTasksHTML (CSSselector, tasksArray) {
+    const listHTMLElement = document.querySelector(CSSselector);
+    listHTMLElement.innerText = ""
+    if (tasksArray.length > 0) {
+        for ( let index in tasksArray ) {
+            listHTMLElement.appendChild(task2HTMLElement(index, tasksArray[index]))
+        }
+    } else {
+        listHTMLElement.innerText = "Add your first task..."
     }
+
+}
+
+export function taskAddButtonClickHandler (event) {
+    //console.log(event)
+    const input = document.querySelector(addTaskInputSelector);
+    event.preventDefault()
+    const newTask = {
+        taskName: input.value,
+        completed: false,
+    };
+    addTask(newTask);
+    updateTasksHTML(taskListHTMLSelector,getTasks());
 }
