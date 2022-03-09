@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,21 +9,31 @@
     <script type="module" src="./js/index.mjs"></script>
     <title>Tareas</title>
 </head>
+
 <body>
     <header>
-        <h1>Lista de tareas</h1>
+        <h1 class="centrar">Lista de tareas</h1>
     </header>
     <main>
-        <div id="deshacer">
-            <p>Seguro que quiere eliminar la tarea <span><input id="addDeshacerButton" type="submit" value="Deshacer"></span></p>
-        </div>
+        <!-- cambios para punto 9 -->
         <form action="">
+            <div class="masTareas">
+            <input id="taskInput" type="text" name="newTask">
+            <input id="addTaskButton" type="submit" value="Añadir">
+            </div>
+            <div class="hide" id="deshacer">
+                <p>Seguro que quiere eliminar la tarea <span><input id="addDeshacerButton" type="submit"
+                            value="Deshacer"></span></p>
+            </div>
+            <div class="centrar">
+                <p>Eliminar todas las tareas completadas <span></span><input id="loquesea" type="submit"
+                        value="Eliminar"></span></p>
+            </div>
             <ul id="tasksList">
                 <!-- Elementos dinámicos -->
             </ul>
-            <input id="taskInput" type="text" name="newTask">
-            <input id="addTaskButton" type="submit" value="+">
         </form>
     </main>
 </body>
+
 </html>

@@ -10,7 +10,7 @@ export function getTasks () {
 
 export function addTask(taskObject) {
     const tasks = getTasks();
-    tasks.push(taskObject);
+    tasks.unshift(taskObject);
     saveTasks(tasks);
 }
 
@@ -19,3 +19,4 @@ export function saveTasks(newTasksArray) {
     localStorage.setItem(tasksStorageKey, stringData);
     updateTasksHTML(taskListHTMLSelector, newTasksArray)
 }
+

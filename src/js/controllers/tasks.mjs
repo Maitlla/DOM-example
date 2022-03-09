@@ -61,17 +61,29 @@ export function taskAddButtonClickHandler(event) {
     }
 }
 
+// añadido para punto 9
 export function addDeshacerButtonClickHandler(event) {
     //console.log(event)
     const input = document.querySelector(addDeshacerButtonSelector);
     event.preventDefault()
-        //damos un atributo display:none que oculta el div
-        input.value.display = (input.value.display === 'none') ? 'block' : 'none';
+        //input.classList.remove(".hide") con esto desaparece el deshacer
+        input.classList.remove(".hide");
+        console.log(event)
         updateTasksHTML(taskListHTMLSelector,getTasks());
     
 }
+/*
+input.style.display = (input.value.display === 'none') ? 'block' : 'none';
 
+Agregue una clase "myStyle" a un elemento:
+    element.classList.add("myStyle");
 
+Elimina la clase "myStyle" de un elemento:
+    element.classList.remove("myStyle");
+
+Alternar entre dos clases para un elemento:
+    element.classList.toggle("newStyle");
+  */
 
 
 // Tener un botón o algo para eliminar
