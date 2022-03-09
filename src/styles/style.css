@@ -1,8 +1,25 @@
 .completed {
     text-decoration:line-through;
+    
 }
 
 li {
     display: flex;
     align-items: center;
 }
+
+#deshacer {
+    width: 100%;
+    height: 5vh; 
+    background-color: rgb(227, 239, 255);
+    text-align: center;
+    color: #8a8b94;
+    font-weight: bold;
+    padding-top: 3px;
+    /*
+    Se oculta pero deja el mismo espacio
+    visibility:hidden; 
+    Se oculta y desaparece el espacio 
+    display:none;  */  
+}
+

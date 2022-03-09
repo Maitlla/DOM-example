@@ -1,6 +1,6 @@
 import { getTasks } from "./models/domainObjects.mjs";
-import { updateTasksHTML, taskAddButtonClickHandler } from "./controllers/tasks.mjs";
-import { taskListHTMLSelector, addTaskButtonSelector } from "./models/defines.mjs"
+import { updateTasksHTML, taskAddButtonClickHandler, addDeshacerButtonClickHandler } from "./controllers/tasks.mjs";
+import { taskListHTMLSelector, addTaskButtonSelector, addDeshacerButtonSelector } from "./models/defines.mjs"
 
 
 /**
@@ -17,6 +17,17 @@ document.querySelector(
     "click",
     taskAddButtonClickHandler
 );
+
+// añadido para punto 9
+document.querySelector(
+    addDeshacerButtonSelector
+).addEventListener(
+    "click",
+    addDeshacerButtonClickHandler
+);
+
+
+
 
 
 
