@@ -17,17 +17,18 @@
     <main>
         <!-- cambios para punto 9 -->
         <form action="">
+        
+                <input id="buscador" type="text" name="newTask">
+
             <div class="masTareas">
             <input id="taskInput" type="text" name="newTask">
             <input id="addTaskButton" type="submit" value="Añadir">
             </div>
-            <div class="hide" id="deshacer">
-                <p>Seguro que quiere eliminar la tarea <span><input id="addDeshacerButton" type="submit"
-                            value="Deshacer"></span></p>
+            <div id="deshacer">
+                <p>Seguro que quiere eliminar la tarea <span><input id="addDeshacerButton" type="submit" value="Deshacer"></span></p>
             </div>
             <div class="centrar">
-                <p>Eliminar todas las tareas completadas <span></span><input id="loquesea" type="submit"
-                        value="Eliminar"></span></p>
+                <p>Eliminar todas las tareas completadas <span><input id="loquesea" type="submit" value="Eliminar"></span></p>
             </div>
             <ul id="tasksList">
                 <!-- Elementos dinámicos -->

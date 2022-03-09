@@ -1,7 +1,6 @@
 import { getTasks } from "./models/domainObjects.mjs";
-import { updateTasksHTML, taskAddButtonClickHandler, addDeshacerButtonClickHandler } from "./controllers/tasks.mjs";
+import { updateTasksHTML, taskAddButtonClickHandler, addDeshacerButtonClickHandler,  buscador} from "./controllers/tasks.mjs";
 import { taskListHTMLSelector, addTaskButtonSelector, addDeshacerButtonSelector } from "./models/defines.mjs"
-
 
 /**
  * Punto de entrada al programa.
@@ -11,20 +10,12 @@ import { taskListHTMLSelector, addTaskButtonSelector, addDeshacerButtonSelector 
  */
 updateTasksHTML(taskListHTMLSelector,getTasks());
 
-document.querySelector(
-    addTaskButtonSelector
-).addEventListener(
-    "click",
-    taskAddButtonClickHandler
-);
+document.querySelector(addTaskButtonSelector).addEventListener("click", taskAddButtonClickHandler);
+
+document.querySelector("#search").addEventListener("input", buscador); // buscador
 
 // añadido para punto 9
-document.querySelector(
-    addDeshacerButtonSelector
-).addEventListener(
-    "click",
-    addDeshacerButtonClickHandler
-);
+document.querySelector(addDeshacerButtonSelector).addEventListener("click", addDeshacerButtonClickHandler);
 
 
 
