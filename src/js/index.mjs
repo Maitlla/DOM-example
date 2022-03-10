@@ -1,5 +1,5 @@
 import { getTasks } from "./models/domainObjects.mjs";
-import { updateTasksHTML, taskAddButtonClickHandler, addDeshacerButtonClickHandler,  buscador} from "./controllers/tasks.mjs";
+import { updateTasksHTML, taskAddButtonClickHandler, addDeshacerButtonClickHandler, buscador } from "./controllers/tasks.mjs";
 import { taskListHTMLSelector, addTaskButtonSelector, addDeshacerButtonSelector } from "./models/defines.mjs"
 
 /**
@@ -8,11 +8,11 @@ import { taskListHTMLSelector, addTaskButtonSelector, addDeshacerButtonSelector 
  * la ejecución se ve diferido al momento en que se
  * termine de cargar el documento HTML.
  */
-updateTasksHTML(taskListHTMLSelector,getTasks());
+updateTasksHTML(taskListHTMLSelector, getTasks());
 
 document.querySelector(addTaskButtonSelector).addEventListener("click", taskAddButtonClickHandler);
 
-document.querySelector("#search").addEventListener("input", buscador); // buscador
+document.querySelector("#buscador").addEventListener("input", buscador); // buscador
 
 // añadido para punto 9
 document.querySelector(addDeshacerButtonSelector).addEventListener("click", addDeshacerButtonClickHandler);

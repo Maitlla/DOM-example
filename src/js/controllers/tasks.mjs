@@ -37,7 +37,7 @@ export function task2HTMLElement(taskIndex, taskObject) {
     );
     return listHTMLItem
 }
-
+/*
 // para borrar
 inputEliminarHTMLItem.addEventListener("click", (event) => {
     updateClock();
@@ -55,7 +55,7 @@ inputEliminarHTMLItem.addEventListener("click", (event) => {
         }
     }
 }
-);
+);  */
 
 export function updateTasksHTML(CSSselector, tasksArray) {
     const listHTMLElement = document.querySelector(CSSselector);
@@ -102,7 +102,7 @@ export function addDeshacerButtonClickHandler(event) {
 
 
 export function buscador(){
-    const searchInput = document.querySelector("#search");
+    const searchInput = document.querySelector("#buscador");
     const tasksList = document.querySelector("#tasksList")
     for(let item of tasksList.children){
         let result = item.children[0].innerText.indexOf(searchInput.value);
