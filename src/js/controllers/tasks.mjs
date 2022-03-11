@@ -62,18 +62,23 @@ export function taskAddButtonClickHandler(event) {
         taskName: input.value,
         completed: false,
     };
+    //Añadido por Maite - punto 7 No añadir tareas vacías
+    //Obliga a que el texto introducido tenga una longitud superior a cero caracteres, (que no sea un texto vacío)
+    //if (input.value.length === 0) { 
+
     //El método trim() elimina los espacios en blanco en ambos extremos del string
     if (input.value.trim() === "") { 
         alert('El campo no puede quedar vacío, la tarea tiene que tener un nombre');
     }else{
         addTask(newTask);
-        input.value = "";
+        //Añadido por Maite - punto 6 Limpiar input tras añadir tarea
+        input.value = ""; 
         updateTasksHTML(taskListHTMLSelector,getTasks());
     }
 }
 
 //Añadido por Maite - punto 9 deshacer eliminar - elimina tareas completadas
-// filtra y guarda las tareas completadas y no completadas en arrays distintos
+// filtra y guarda las tareas completadas y no completadas en arrays distintos (se guardan en localStorage)
 let tareasEliminadas = [];
 function eliminarTareasCompletadas(){
     tareasEliminadas = getTasks().filter(function(tarea){ return tarea.completed;});
@@ -99,7 +104,7 @@ function ocultarDeshacer() {
     document.querySelector("#deshacer").classList.add("hidden");
 }; 
 
-//Añadido por Samu - Maite - eliminar tareas completadas por separado o todas
+//Añadido por Samu - Maite - eliminar tareas completadas (todas)
 // se quita el hidden y se ve el div azul y el botón deshacer durante 5 segundos
 export function deleteButtonClickHandler(event) {
     event.preventDefault();
@@ -108,6 +113,13 @@ export function deleteButtonClickHandler(event) {
     setTimeout(ocultarDeshacer, 5000); 
 
 }
+//...........
+
+let elems = document.querySelectorAll('select option:checked');
+let values = [].map.call(elems, function(obj) {
+  return obj.value;
+});
+//...........
 
 //Añadido por Israel
 export function showAreaTextForEdit(event){
