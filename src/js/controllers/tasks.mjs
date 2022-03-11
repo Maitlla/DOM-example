@@ -72,25 +72,42 @@ export function taskAddButtonClickHandler(event) {
     }
 }
 
-
-//Añadido por Maite - Posible función
-export function addDeshacerButtonClickHandler(event) {
+//Añadido por Maite - punto 9 deshacer eliminar - elimina tareas completadas
+// filtra y guarda las tareas completadas y no completadas en arrays distintos
+let tareasEliminadas = [];
+function eliminarTareasCompletadas(){
+    tareasEliminadas = getTasks().filter(function(tarea){ return tarea.completed;});
+    const tareasNoEliminadas = getTasks().filter(function(tarea){ return !tarea.completed;});
+    saveTasks(tareasNoEliminadas);  
+    updateTasksHTML(taskListHTMLSelector,getTasks());
+}
+//Añadido por Maite - punto 9 deshacer eliminar - cuando haces click en deshacer las restaura a completadas 
+export function botonDeshacerClickHandler(event) {
     //console.log(event)
-    const input = document.querySelector(addDeshacerButtonSelector);
     event.preventDefault()
-        //damos un atributo display:none que oculta el div
-        input.value.display = (input.value.display === 'none') ? 'block' : 'none';
-        updateTasksHTML(taskListHTMLSelector,getTasks());
-    
+    document.querySelector("#deshacer").classList.add("hidden");
+    let todasLasTareas = getTasks();
+    tareasEliminadas.forEach(element => {
+        todasLasTareas.push(element);
+    });
+    saveTasks(todasLasTareas);  
+    updateTasksHTML(taskListHTMLSelector,getTasks());    
 }
+//Añadido por Maite - punto 9 deshacer eliminar
+// se añade el hidden para ocultar el div azul con el botón deshacer
+function ocultarDeshacer() {
+    document.querySelector("#deshacer").classList.add("hidden");
+}; 
 
-//Añadido por Samu - Función eliminar completadas
-export function DeleteCompletedButton(event) {
-    //console.log(event)
-    const elementsArray = getTasks()
-    console.log(elementsArray);
+//Añadido por Samu - Maite - eliminar tareas completadas por separado o todas
+// se quita el hidden y se ve el div azul y el botón deshacer durante 5 segundos
+export function deleteButtonClickHandler(event) {
+    event.preventDefault();
+    eliminarTareasCompletadas();
+    document.querySelector("#deshacer").classList.remove("hidden");
+    setTimeout(ocultarDeshacer, 5000); 
+
 }
-
 
 //Añadido por Israel
 export function showAreaTextForEdit(event){
@@ -100,5 +117,4 @@ export function showAreaTextForEdit(event){
     elementoInput.classList.add('mostrarAlgo');
 
 }
-
 

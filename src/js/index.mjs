@@ -1,6 +1,6 @@
 import { getTasks,saveTasks } from "./models/domainObjects.mjs";
-import { updateTasksHTML, taskAddButtonClickHandler, botonDeshacerClickHandler ,showAreaTextForEdit} from "./controllers/tasks.mjs";
-import { taskListHTMLSelector, addTaskButtonSelector, botonDeshacerSelector ,inputAreaEditHTMLItem } from "./models/defines.mjs"
+import { updateTasksHTML, taskAddButtonClickHandler, botonDeshacerClickHandler ,showAreaTextForEdit, deleteButtonClickHandler} from "./controllers/tasks.mjs";
+import { taskListHTMLSelector, addTaskButtonSelector, botonDeshacerSelector ,inputAreaEditHTMLItem, deleteButtonSelector } from "./models/defines.mjs"
 import {vectorFTareasAcabadas} from "./helpers/funcionesHelpers.mjs";
 /**
  * Punto de entrada al programa.
@@ -17,18 +17,21 @@ document.querySelector(
     taskAddButtonClickHandler
 );
 
-// añadido para punto 9
-document.querySelectorAll(
+// Añadido por Maite - punto 9 deshacer eliminar - evento click del botón deshacer
+document.querySelector(
     botonDeshacerSelector
-    ).addEventListener("click", botonDeshacerClickHandler);
+).addEventListener(
+    "click",
+    botonDeshacerClickHandler
+);
 
-// añadido para punto 2
-/*document.querySelector(
-    addTaskDeleteButtonSelector
+// Añadido por Samu para punto 2
+document.querySelector(
+    deleteButtonSelector
     ).addEventListener(
     "click",
-     DeleteCompletedButton
-);*/
+    deleteButtonClickHandler
+);
 
 // añadido Israel para punto 1
 document.querySelector(
@@ -51,42 +54,6 @@ document.querySelector(
 
 
 
-
-/*
-// Definir una función llamada tiempoDeshacer
-const tiempoDeshacer = () => {
-    window.alert("Deshacer");
-};
-//se la llama a los 10 segundos
-setTimeout(tiempoDeshacer, 1000);  */
-
-
-
-/*
-
-Agregue una clase "myStyle" a un elemento:
-    element.classList.add("myStyle");
-
-Elimina la clase "myStyle" de un elemento:
-    element.classList.remove("myStyle");
-
-Alternar entre dos clases para un elemento:
-    element.classList.toggle("newStyle");
-  */
-
-
-// Tener un botón o algo para eliminar
-// Al eliminar:
-// - Guardar la tarea en una variable antes de eliminarla de la lista de tareas
-// - Mostrar el div para deshacer
-// - Poner un timer setTimeout(function, milliseconds) que pasado X segundos oculte el div
-// - Si se pulsa sobre el div de deshacer, se vuelve a meter la tarea que habíamos guardado en la variable en la lista
-// - Igual aparte de la tarea hay que guardar también la posición en la que estaba para volverla a meter en la misma posición
-
-
-
-
-//"Task_9_A_0.1_div con botón, mirado (display:none)_Deshacer eliminar tarea durante unos segundos"
 
 
 
@@ -123,9 +90,6 @@ const mappedTask = tasks.map(
 
 console.log("With map:", JSON.stringify(mappedTask))
 */
-
-
-
 
 
 
